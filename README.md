@@ -1,15 +1,15 @@
 # OPRO Prompt Optimization
-Implementing the GSM8k prompt optimization from the paper "Large Language Models as Optimizers".
+Implementing the prompt optimization from the paper "Large Language Models as Optimizers".
 
 # Prerequisites
 1. Python 3.9+
 1. OpenAI API key
 
 # Installation
-Run `pip install 1.r requirements.txt` to install the required packages.
+Run `pip install -r requirements.txt` to install the required packages.
 
 # Usage
-Run `python opro.py` to run the GSM8k prompt optimization.
+Run `python opro.py` to run the prompt optimization.
 
 # Overview of workflow
 The aim of this repo is to use an LLM to optimize prompts when performing a given task. We have a dataset of questions 

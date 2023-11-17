@@ -1,7 +1,6 @@
 import logging
 from typing import List
 
-import openai
 from prompts import format_openai_chat_prompt
 from prompts import opt_prompt_template
 from prompts import problem_example_template
@@ -9,6 +8,7 @@ from prompts import prompt_example_template
 from schema import ProblemExample
 from schema import PromptExample
 
+from src.opro.openai_utils import completion_with_backoff
 from src.opro.config import CANDIDATES_PER_STEP
 from src.opro.config import MAX_RESPONSE_TOKENS
 from src.opro.config import MODEL_NAME
@@ -47,7 +47,7 @@ def generate_prompt_candidates(
     LOGGER.info("Generating prompt candidates")
     opt_prompt = generate_opt_prompt(prompt_examples, problem_examples)
 
-    response = openai.ChatCompletion.create(
+    response = completion_with_backoff(
         model=MODEL_NAME,
         messages=format_openai_chat_prompt(opt_prompt),
         temperature=1.0,

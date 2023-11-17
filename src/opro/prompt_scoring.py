@@ -3,29 +3,19 @@ import re
 from multiprocessing.pool import ThreadPool
 from typing import List
 
-import openai
-from tenacity import (  # for exponential backoff
-    retry,
-    stop_after_attempt,
-    wait_random_exponential,
-)
 from prompts import build_problem_prompt
 from prompts import format_openai_chat_prompt
 from schema import ProblemExample
 from schema import PromptExample
 from tqdm import tqdm
 
+from src.opro.openai_utils import completion_with_backoff
 from src.opro.config import FINAL_ANSWER_SEP
 from src.opro.config import MAX_RESPONSE_TOKENS
 from src.opro.config import MODEL_NAME
 from src.opro.config import THREADS
 
 LOGGER = logging.getLogger(__name__)
-
-
-@retry(wait=wait_random_exponential(min=1, max=60), stop=stop_after_attempt(6))
-def completion_with_backoff(**kwargs):
-    return openai.ChatCompletion.create(**kwargs)
 
 
 def generate_answer_proc(candidate_problem_prompt: str):

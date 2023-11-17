@@ -11,10 +11,7 @@ from tqdm import tqdm
 
 from src.opro.prompt_generation import generate_prompt_candidates
 from src.opro.prompt_scoring import score_prompt_candidates
-from src.opro.config import MAX_ITER
-from src.opro.config import MAX_PROMPT_CANDIDATES
-from src.opro.config import MAX_TEST_EXAMPLES
-from src.opro.config import MAX_TRAIN_EXAMPLES
+from src.opro.config import MAX_ITER, MAX_PROMPT_CANDIDATES, MAX_TEST_EXAMPLES, MAX_TRAIN_EXAMPLES
 
 logging.basicConfig(
     format="%(asctime)s - %(levelname)s - %(name)s - %(message)s",
@@ -52,6 +49,9 @@ def main():
     test_examples = get_dataset("dataset.json")[MAX_TRAIN_EXAMPLES+1:MAX_TEST_EXAMPLES]
 
     prompt_examples = seed_prompt_examples(train_examples[:1], test_examples)
+    LOGGER.info("Seed prompt result: \n"
+          f"Prompt: {prompt_examples[0].prompt} \n"
+          f"Score: {prompt_examples[0].score} \n")
 
     for _ in tqdm(range(MAX_ITER), desc="Optimization iteration"):
         prompt_candidates = generate_prompt_candidates(prompt_examples, train_examples)

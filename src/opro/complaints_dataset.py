@@ -6,9 +6,9 @@ from src.opro.config import FINAL_ANSWER_SEP
 
 
 def get_dataset(filename) -> List[ProblemExample]:
-    target_path = rf"data/{filename}.json"
-    with open(target_path, "r"):
-        raw_data = json.loads(target_path)
+    target_path = rf"data/{filename}"
+    with open(target_path, "r") as file:
+        raw_data = json.loads(file.read())
 
     dataset = [
         ProblemExample(
