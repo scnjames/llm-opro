@@ -15,10 +15,10 @@ from schema import ProblemExample
 from schema import PromptExample
 from tqdm import tqdm
 
-from src.opro.settings import FINAL_ANSWER_SEP
-from src.opro.settings import MAX_RESPONSE_TOKENS
-from src.opro.settings import MODEL_NAME
-from src.opro.settings import THREADS
+from src.opro.config import FINAL_ANSWER_SEP
+from src.opro.config import MAX_RESPONSE_TOKENS
+from src.opro.config import MODEL_NAME
+from src.opro.config import THREADS
 
 LOGGER = logging.getLogger(__name__)
 

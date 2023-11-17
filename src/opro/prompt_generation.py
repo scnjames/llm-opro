@@ -9,9 +9,9 @@ from prompts import prompt_example_template
 from schema import ProblemExample
 from schema import PromptExample
 
-from src.opro.settings import CANDIDATES_PER_STEP
-from src.opro.settings import MAX_RESPONSE_TOKENS
-from src.opro.settings import MODEL_NAME
+from src.opro.config import CANDIDATES_PER_STEP
+from src.opro.config import MAX_RESPONSE_TOKENS
+from src.opro.config import MODEL_NAME
 
 LOGGER = logging.getLogger(__name__)
 

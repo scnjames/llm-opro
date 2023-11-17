@@ -4,17 +4,17 @@ from typing import List
 
 import openai
 from dotenv import load_dotenv
-from gsm8k import get_dataset
+from complaints_dataset import get_dataset
 from schema import ProblemExample
 from schema import PromptExample
 from tqdm import tqdm
 
 from src.opro.prompt_generation import generate_prompt_candidates
 from src.opro.prompt_scoring import score_prompt_candidates
-from src.opro.settings import MAX_ITER
-from src.opro.settings import MAX_PROMPT_CANDIDATES
-from src.opro.settings import MAX_TEST_EXAMPLES
-from src.opro.settings import MAX_TRAIN_EXAMPLES
+from src.opro.config import MAX_ITER
+from src.opro.config import MAX_PROMPT_CANDIDATES
+from src.opro.config import MAX_TEST_EXAMPLES
+from src.opro.config import MAX_TRAIN_EXAMPLES
 
 logging.basicConfig(
     format="%(asctime)s - %(levelname)s - %(name)s - %(message)s",
@@ -48,8 +48,8 @@ def main():
     load_dotenv()
     openai.api_key = os.getenv("OPENAI_API_KEY")
 
-    train_examples = get_dataset("train")[:MAX_TRAIN_EXAMPLES]
-    test_examples = get_dataset("test")[:MAX_TEST_EXAMPLES]
+    train_examples = get_dataset("dataset.json")[:MAX_TRAIN_EXAMPLES]
+    test_examples = get_dataset("dataset.json")[MAX_TRAIN_EXAMPLES+1:MAX_TEST_EXAMPLES]
 
     prompt_examples = seed_prompt_examples(train_examples[:1], test_examples)
 

@@ -53,7 +53,20 @@ def build_problem_prompt(
         question=new_problem.question, instruction=prompt_candidate, answer=""
     )
     meta_instruction = (
-        "Solve the problem in the same format as in the following examples."
+        """Solve the problem in the same format as in the following examples. Your answer should exactly match one of 
+        the following options:
+        1. Checking or savings account
+        2. Credit card
+        3. Credit reporting or other personal consumer reports
+        4. Debt collection
+        5. Debt or credit management
+        6. Money transfer, virtual currency, or money service
+        7. Mortgage
+        8. Payday loan, title loan, personal loan, or advance loan
+        9. Prepaid card
+        10. Student loan
+        11. Vehicle loan or lease
+        """
     )
     return f"{meta_instruction}\nExamples:\n {formatted_prompt_examples}\n Problem:\n {new_problem}"
 
